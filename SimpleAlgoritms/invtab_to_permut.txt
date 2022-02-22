@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+void  invtab_to_permut(int* b, int* a, int n)
+{
+	a[1] = n;
+	for (int i = n - 1; i > 0; i--)
+	{
+		if (b[i] == 0)
+		{
+			for (int j = n - i; j > 0; j--)
+			{
+				a[j + 1] = a[j];
+			}
+			a[1] = i;
+		}
+		else
+		{
+			for (int j = n - i; j > b[i]; j--)
+			{
+				a[j + 1] = a[j];
+			}
+			a[b[i] + 1] = i;
+		}
+	}
+}
+void  permut_to_invtab(int* a, int* b, int n)
+{
+	for (int i = 1; i < n + 1; i++)
+	{
+		b[i] = 0;
+	}
+	for (int i = 2; i < n + 1; i++)
+	{
+		for (int j = i; j > 0; j--)
+		{
+			if (a[j] > a[i])
+			{
+				b[a[i]]++;
+			}
+		}
+	}
+}
+int main()
+{
+	int *a, *b1, *b2, n;
+	scanf("%i", &n);
+	a = malloc(sizeof(int) * (n + 1));
+	b1 = malloc(sizeof(int) * (n + 1));
+	b2 = malloc(sizeof(int) * (n + 1));
+	for (int i = 1; i < n + 1; i++)
+	{
+		scanf("%i", &b1[i]);
+	}
+	invtab_to_permut(b1, a, n);
+	permut_to_invtab(a, b2, n);
+	for (int i = 1; i < n + 1; i++)
+	{
+		if (b1[i] != b2[i])
+		{
+			printf("NO");
+			break;
+		}
+		if (i == n)
+		{
+			for (int j = 1; j < n + 1; j++)
+			{
+				printf("%i ", a[j]);
+			}
+		}
+	}
+	free(b1);
+	free(b2);
+	free(a);
+	return 0;
+}

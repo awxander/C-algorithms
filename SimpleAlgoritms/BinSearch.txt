@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+	int N, X;
+	scanf("%i%i", &N,&X);
+	int low = 0, high = N-1;
+	int* A = malloc(sizeof(int) * N);
+	for (int i = 0; i < N; i++)
+	{
+		scanf("%i", &A[i]);
+	}
+	while (1)
+	{
+		int mid = (high + low) / 2 + (low + high) % 2;
+		
+		if (A[mid] > X)
+		{
+			high = mid;
+		}
+		else
+		{
+			if (A[mid] < X)
+			{
+				low = mid;
+			}
+			else
+			{
+				printf("%i", mid);
+				break;
+			}
+		}
+		if (high - low < 2 && A[low]!=X && A[high]!=X)
+		{
+			printf("-1");
+			break;
+		}
+	}
+
+	return 0;
+}
+

@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+int gcd(int a, int b)
+{
+	if (a == 0 || b == 0)
+	{
+		if (a == 0 && b == 0)
+		{
+			return -1;
+		} 
+		else
+		{
+			return 1;
+		}
+		
+}
+	while (a != b)
+	{
+		if (a > b)
+			a -= b;
+		if (a < b)
+			b -= a;
+	}
+	return a;
+}
+int main()
+{
+	int a, b;
+	scanf("%i%i", &a, &b);
+	printf("%i", gcd(a, b));
+	return 0;
+}

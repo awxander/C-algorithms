@@ -1,0 +1,61 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "GCCDebug",
+			"command": "C:\\MinGW\\bin\\gcc.exe",
+			"args": [
+				"-g", 
+				"${file}",
+				"-o",
+				"${fileDirname}\\GCCDebug\\${fileBasenameNoExtension}.exe"
+			],
+			"options": {
+				"cwd": "C:\\MinGW\\bin"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+			
+		},
+
+		{
+			"label":"DirGCCRelease",
+			"type":"shell",
+			"windows":{
+				"command": "cmd",
+				"args": ["/C", "if not exist ${fileDirname}\\${config:GCCReleaseDir} mkdir ${fileDirname}\\${config:GCCReleaseDir}"]
+			}
+		},
+
+		{
+			"label":"DirGCCDebug",
+			"type":"shell",
+			"windows":{
+				"command": "cmd",
+				"args": ["/C", "if not exist ${fileDirname}\\GCCDebug mkdir ${fileDirname}\\GCCDebug"]
+			}
+		},
+
+		{
+			"label": "GCC_Debug",
+			"dependsOn":[
+				"DirGCCDebug",
+				"GCCDebug"
+			]
+		},
+
+		{
+			"label": "GCC_Release",
+			"dependsOn":[
+				"DirGCCRelease",
+				"gcc_release_build"
+			]
+		}
+	]
+}

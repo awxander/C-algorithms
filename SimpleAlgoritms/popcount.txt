@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+int popcount( int x)
+{
+	int M1 = 0x55555555;
+	int M2 = 0x33333333;
+
+	int M3 = 0x0f0f0f0f;
+	int M4 = 0x00ff00ff;
+	int M5 = 0x0000ffff;
+	printf("%0x\n", M5);
+	printf("%i\n", x);
+	x = ((x >> 1)& M1) + (x & M1);
+	printf("%i\n", x);
+	x = ((x >> 2)& M2) + (x & M2);
+	printf("%i\n", x);
+	x = ((x >> 4)& M3 )+( x & M3);
+	printf("%i\n", x);
+	x = ((x >> 8)& M4) + (x & M4);
+	printf("%i\n", x);
+	x = ((x >> 16)& M5) + (x & M5);
+	printf("%i\n", x);
+	return(x);
+}
+int main()
+{
+	int x = 16;
+	x = popcount(x);
+	printf("%i", x);
+}
